@@ -1,7 +1,9 @@
 async function main() {
     const ContractFactory = await ethers.getContractFactory("LevelUpsToken");
     const contract = await ContractFactory.deploy();
-    console.log("Contract deployed to:", contract.address);
+  
+    await contract.waitForDeployment();
+    console.log("Contract deployed to:", await contract.getAddress());
 }
 
 main().catch((error) => {
