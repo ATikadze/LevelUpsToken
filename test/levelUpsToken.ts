@@ -1,5 +1,6 @@
 const { ethers } = require("hardhat");
 const { expect } = require("chai");
+const { anyValue } = require("@nomicfoundation/hardhat-chai-matchers/withArgs");
 
 describe("Level Ups Token", function () {
     let contract;
@@ -16,7 +17,7 @@ describe("Level Ups Token", function () {
         it("Create Player", async function () {
             await expect(await contract.createPlayer())
                 .to.emit(contract, "PlayerCreated")
-                .withArgs(deployer);
+                .withArgs(deployer, anyValue);
         });
 
         it("Check Create Duplicate Player", async function () {
@@ -49,7 +50,7 @@ describe("Level Ups Token", function () {
         it("Player Level Up to 2", async function () {
             await expect(await contract.levelUp())
                 .to.emit(contract, "LevelUpgraded")
-                .withArgs(deployer, 2);
+                .withArgs(deployer, 2, anyValue);
         });
     });
 
